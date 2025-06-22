@@ -1,0 +1,33 @@
+# .github/workflows/proto-ci.yml
+name: Proto CI
+
+on:
+  push:
+    paths:
+      - '**.proto'
+  pull_request:
+    paths:
+      - '**.proto'
+
+jobs:
+  proto-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install protoc
+        run: sudo apt-get install -y protobuf-compiler
+
+      - name: Check proto syntax
+        run: |
+          find . -name "*.proto" -print0 | xargs -0 -n1 protoc --proto_path=.
+
+      # 可选：使用 buf 进行 lint 和格式化检查
+      - name: Install buf
+        run: |
+          curl -sSL "https://github.com/bufbuild/buf/releases/download/v1.28.1/buf-Linux-x86_64" -o /usr/local/bin/buf
+          chmod +x /usr/local/bin/buf
+
+      - name: Buf lint
+        run: buf lint
+        continue-on-error: true  # 如果你还没写 buf.yaml，可以先跳过报错
