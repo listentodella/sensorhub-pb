@@ -27,6 +27,11 @@ message sns_raw_register_req
     optional bytes  data     = 6; // Register data to be written or read
 }
 
+message sns_raw_register_rsp
+{
+    bytes data = 1; // Data read from the register, if applicable
+}
+
 message sns_raw_register_sequence_req
 {
     repeated sns_raw_register_req reqs = 1; // Sequence of register requests

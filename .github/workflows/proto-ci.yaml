@@ -20,7 +20,7 @@ jobs:
 
       - name: Check proto syntax
         run: |
-          find . -name "*.proto" -print0 | xargs -0 -n1 protoc --proto_path=.
+          find . -name "*.proto" -print0 | xargs -0 -n1 protoc --proto_path=. --descriptor_set_out=/dev/null
 
       # 可选：使用 buf 进行 lint 和格式化检查
       - name: Install buf
