@@ -208,6 +208,10 @@ enum sns_std_sensor_attr_id {
     // If this attribute is not supported, then the sensor does not support passive requests.
     // Sensors that do not support passive requests, will service all requests as active requests.
     SNS_STD_SENSOR_ATTRID_PASSIVE_REQUEST = 26;
+
+    // REQUIRED
+    // String
+    SNS_STD_SENSOR_ATTRID_SUID = 1024;
 }
 
 // Sensor stream configuration request
